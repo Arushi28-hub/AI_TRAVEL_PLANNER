@@ -1,9 +1,11 @@
+import os
 import pandas as pd
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
 # Load dataset
-df = pd.read_csv("data/processed_travel_dataset.csv")
+_BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+df = pd.read_csv(os.path.join(_BASE_DIR, "data", "processed_travel_dataset.csv"))
 
 # -----------------------------
 # Content-Based Recommendation

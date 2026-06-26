@@ -17,7 +17,8 @@ def geocode_df_locations(df):
     if 'query' not in df.columns:
         df['query'] = df['Name'].astype(str) + ", " + df['City'].astype(str)
 
-    cache_path = os.path.join('data', 'geocode_cache.csv')
+    _BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+    cache_path = os.path.join(_BASE_DIR, 'data', 'geocode_cache.csv')
     if os.path.exists(cache_path):
         try:
             cache = pd.read_csv(cache_path)
