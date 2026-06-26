@@ -3,12 +3,21 @@ import time
 from dotenv import load_dotenv
 from google import genai
 
-# Load .env
+# Load .env for local development
 load_dotenv()
 
+# Try environment variable first (local .env), then fall back to Streamlit secrets (cloud)
 API_KEY = os.getenv("GEMINI_API_KEY")
 
+if not API_KEY:
+    try:
+        import streamlit as st
+        API_KEY = st.secrets["GEMINI_API_KEY"]
+    except Exception:
+        API_KEY = None
+
 client = genai.Client(api_key=API_KEY)
+
 
 
 def create_prompt(
